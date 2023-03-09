@@ -54,7 +54,8 @@ class SimpleReport:
         contador = Counter(
             product["nome_da_empresa"] for product in list
         )
-        return contador.most_common()
+        # https://blog.csdn.net/Silentli20/article/details/121518963
+        return contador.most_common()[0][0]
 
     @staticmethod
     def generate(list):
