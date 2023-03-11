@@ -2,6 +2,7 @@ import csv
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 import json
+import xml.etree.ElementTree as ElementTree
 
 
 class Inventory:
@@ -10,8 +11,21 @@ class Inventory:
             tabela_dados = csv.DictReader(file)
             dados_do_arquivo = [linha for linha in tabela_dados]
             return dados_do_arquivo
-        if formato_do_arquivo == "json":
+        elif formato_do_arquivo == "json":
             return json.load(file)
+        elif formato_do_arquivo == "xml":
+            arquivo = file.read()
+            dados_do_arquivo = ElementTree.fromstring(arquivo)
+            lista_dados = []
+            for info in dados_do_arquivo:
+                dados = {}
+                for item in info:
+                    dados[item.tag] = item.text
+                lista_dados.append(dados)
+            return lista_dados
+        else:
+            return "Aceitamos apenas arquivos csv, json e xml. "\
+                   "Tente novamente usando um arquivo em formato válido."
 
     def obter_extensao_arquivo(caminho_arquivo):
         partes = caminho_arquivo.split(".")
