@@ -31,12 +31,12 @@ class Inventory:
             return "Aceitamos apenas arquivos csv, json e xml. "\
                    "Tente novamente usando um arquivo em formato válido."
 
-    def obter_extensao_arquivo(caminho_arquivo):
-        partes = caminho_arquivo.split(".")
-        if len(partes) == 1:
+    def obter_extensao_arquivo(path):
+        string_nome_arquivo = path.split(".")
+        if len(string_nome_arquivo) == 1:
             return []
         else:
-            return partes[-1]
+            return string_nome_arquivo[-1]
 
     @staticmethod
     def import_data(path, tipo_do_relatorio):
