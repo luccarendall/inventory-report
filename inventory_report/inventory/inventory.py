@@ -14,14 +14,18 @@ class Inventory:
         elif formato_do_arquivo == "json":
             return json.load(file)
         elif formato_do_arquivo == "xml":
-            arquivo = file.read()
-            dados_do_arquivo = ElementTree.fromstring(arquivo)
-            lista_dados = []
-            for info in dados_do_arquivo:
-                dados = {}
-                for item in info:
-                    dados[item.tag] = item.text
-                lista_dados.append(dados)
+            # Esse método funcionou mas deu excesso de complexidade \/
+            # arquivo = file.read()
+            # dados_do_arquivo = ElementTree.fromstring(arquivo)
+            # lista_dados = []
+            # for info in dados_do_arquivo:
+            #     dados = {}
+            #     for item in info:
+            #         dados[item.tag] = item.text
+            #     lista_dados.append(dados)
+            dados_do_arquivo = ElementTree.parse(file).getroot()
+            lista_dados = [{item.tag: item.text for item in info}
+                           for info in dados_do_arquivo]
             return lista_dados
         else:
             return "Aceitamos apenas arquivos csv, json e xml. "\
