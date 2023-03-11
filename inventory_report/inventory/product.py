@@ -1,3 +1,5 @@
+# from inventory_report.reports.complete_report import CompleteReport
+
 class Product:
     def __init__(
         self,
