@@ -10,7 +10,7 @@ def test_cria_produto():
     data_de_validade = "01/01/2024"
     numero_de_serie = "12345"
     instrucoes_de_armazenamento = "em local seco e arejado"
-    # linha de respiro
+
     produto = Product(
         id,
         nome_do_produto,
