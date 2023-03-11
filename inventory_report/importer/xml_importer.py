@@ -3,17 +3,10 @@ import xml.etree.ElementTree as ElementTree
 
 
 class XmlImporter(Importer):
-    def obter_extensao_arquivo(path):
-        string_nome_arquivo = path.split(".")
-        if len(string_nome_arquivo) == 1:
-            return []
-        else:
-            return string_nome_arquivo[-1]
-
-    @staticmethod
-    def import_data(path):
+    @classmethod
+    def import_data(self, path):
         dados_do_arquivo = []
-        formato_arquivo = XmlImporter.obter_extensao_arquivo(path)
+        formato_arquivo = Importer.obter_extensao_arquivo(path)
 
         if formato_arquivo == "xml":
             with open(path) as file:
